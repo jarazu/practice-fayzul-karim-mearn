@@ -1,22 +1,23 @@
-syncCallbackFunction = (start) => {
+syncCallbackFunction = (index, start) => {
     const numIsPrime = isPrime(index);
-    console.log('prime', index, numIsPrime, start, new Date().getSeconds())
+    console.log('isprime', index, 'result: ', numIsPrime,'start: ', start, ' end: ', new Date())
 }
 
 const syncWithCallback = () => {
     for(let index = 0; index < 10; index++){
         // debugger;
-        console.log('sleeping', index, new Date().getSeconds());
-        sleepWithCallback(index*1000, syncCallbackFunction)
+        console.log('looping', index, new Date()); //.getSeconds()
+        sleepWithCallback(index, syncCallbackFunction)
     }
 }
 
 const sleepWithCallback = (num, callback) => {
     const start = Date.now();
+	const sleep = num * 1000;
     while(true){
-        if(Date.now() - start > num){break}
+        if(Date.now() - start > sleep){break}
     }
-    callback(new Date(start).getSeconds());
+    callback(num, new Date(start));
 }
 
 const isPrime = (num) => {
